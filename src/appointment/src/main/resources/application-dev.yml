@@ -1,0 +1,40 @@
+micronaut:
+  application:
+    name: appointment
+  security:
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: pleaseChangeThisSecretForANewOne
+      roles-name: "scope"
+    endpoints:
+      logout:
+        enabled: true
+        get-allowed: true
+    enabled: true
+  metrics:
+    enabled: false
+    export:
+      oraclecloud:
+        enabled: true
+        namespace: uho_${micronaut.application.name}
+        resourceGroup: mn_local
+        compartmentId: "" #<Add compartment id here where metrics need to be posted>
+datasources:
+  default:
+    ocid:
+    walletPassword:
+    username:
+    password:
+
+service:
+  patient: ""
+
+streaming:
+  id:
+  endpoint:
+oci:
+  config:
+    profile: DEFAULT

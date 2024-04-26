@@ -1,0 +1,48 @@
+micronaut:
+  router:
+    static-resources:
+      default:
+        # paths: file:<path-to-web-directory>/packages/uho-web/build/dev/en-US # run frontend with npm run dev-watch
+  security:
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: pleaseChangeThisSecretForANewOne
+    oauth2:
+      clients:
+        patient:
+          scopes:
+            - openid
+            - http://localhost:8080/patient
+          client-id: 190ced30b120453997e08f5f180b6e58
+          client-secret: d4652124-c4ad-4652-abcb-4c2f20c5883d
+          openid:
+            issuer: https://idcs-2655c3f4c7564ce0962aca8a3c1e9774.identity.oraclecloud.com
+        provider:
+          scopes:
+            - openid
+            - http://localhost:8080/provider
+          client-id: 1f0094272ea243b4adda4807a506b13f
+          client-secret: d4910ba9-de74-477c-889b-f7265747483e
+          openid:
+            issuer: https://idcs-fb1aabd1801f44ad883bbd3699a16117.identity.oraclecloud.com
+      callback-uri: http://localhost:8080/oauth/callback{/provider}
+      login-uri: http://localhost:8080/oauth/login{/provider}
+    redirect:
+      logout: ${micronaut.server.context-path}
+  metrics:
+    enabled: false
+    export:
+      oraclecloud:
+        enabled: true
+        namespace: uho_${micronaut.application.name}
+        resourceGroup: mn_local
+        compartmentId: ocid1.compartment.oc1..aaaaaaaavvchhokfsrwe64mi3e6ro3dvel6rtv5cllwaiom3jkzvod26zesq
+apigw:
+  url: https://e3zsstgmmx47nc3m7rjd5hlvdi.apigateway.uk-london-1.oci.customer-oci.com
+
+oci:
+  config:
+    profile: DEFAULT
